@@ -1,16 +1,15 @@
 <?php
 
-/*
- *  web.com/?c=usuarios&a=listar
- *
- * c: nombre del controlador
- * a: la accion  del controlador que se va a lanzar
- *  
- * 
- */
+function __autoload($nombre)
+{
+    if(strstr($nombre,'Model')):
+    require_once 'models/'.$nombre.'.php';
+    endif;
+}
+include('libs/Coneccion.php');
 
-$c=$_GET['c']; //es una clase
-$a=$_GET['a']; // es un metodo 
+$c=isset($_GET['c'])?$_GET['c']:'Usuarios'; //es una clase
+$a=isset($_GET['a'])?$_GET['a']:'index'; // es un metodo 
 
 $pathControllers='controllers/'; // ruta donde se encontraran los controladores de mi aplicacion
 $controlador=  ucfirst($c).'Controller';
